@@ -32,14 +32,15 @@ def convolutional(input_layer, filters_shape, downsample=False, activate=True, b
 
     if bn: conv = BatchNormalization()(conv)
     if activate == True:
-        if activate_type == "leaky":
-            conv = tf.nn.leaky_relu(conv, alpha=0.1)
-        elif activate_type == "mish":
-            conv = mish(conv)
+        # if activate_type == "leaky":
+        #     conv = tf.nn.leaky_relu(conv, alpha=0.1)
+        # elif activate_type == "mish":
+        #     conv = mish(conv)
+        conv = tf.nn.leaky_relu(conv, alpha=0.1)
     return conv
 
-def mish(x):
-    return x * tf.math.tanh(tf.math.softplus(x))
+# def mish(x):
+#     return x * tf.math.tanh(tf.math.softplus(x))
     # return tf.keras.layers.Lambda(lambda x: x*tf.tanh(tf.math.log(1+tf.exp(x))))(x)
 
 def residual_block(input_layer, input_channel, filter_num1, filter_num2, activate_type='leaky'):
